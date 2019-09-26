@@ -1,0 +1,7 @@
+C:\Users\Delep\source\repos\DiceRolls\DiceRolls\bin\Debug\DiceRolls.exe.config
+C:\Users\Delep\source\repos\DiceRolls\DiceRolls\bin\Debug\DiceRolls.exe
+C:\Users\Delep\source\repos\DiceRolls\DiceRolls\bin\Debug\DiceRolls.pdb
+C:\Users\Delep\source\repos\DiceRolls\DiceRolls\obj\Debug\DiceRolls.csprojAssemblyReference.cache
+C:\Users\Delep\source\repos\DiceRolls\DiceRolls\obj\Debug\DiceRolls.csproj.CoreCompileInputs.cache
+C:\Users\Delep\source\repos\DiceRolls\DiceRolls\obj\Debug\DiceRolls.exe
+C:\Users\Delep\source\repos\DiceRolls\DiceRolls\obj\Debug\DiceRolls.pdb

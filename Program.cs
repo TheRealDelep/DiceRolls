@@ -12,9 +12,6 @@ namespace DiceRolls
 
         static string input;
 
-        static int numberOfDices;
-        static int numberOfFaces;
-
         static void Main(string[] args)
         {
             WelcomeScreen();
@@ -55,7 +52,10 @@ namespace DiceRolls
                     {
                         dices += c;
                     }
-                    else faces += c;
+                    else
+                    {
+                        faces += c;
+                    }
                 }
                 else
                 {
@@ -71,6 +71,9 @@ namespace DiceRolls
 
         static void RollTheDice(string dices, string faces)
         {
+            int numberOfDices = 0;
+            int numberOfFaces = 0;
+
             int.TryParse(dices, out numberOfDices);
             int.TryParse(faces, out numberOfFaces);
 

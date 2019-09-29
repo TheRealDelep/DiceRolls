@@ -8,66 +8,28 @@ namespace DiceRolls
 {
     class Program
     {
+        static string input = "";
+        static int bonus = 0;
         static int score = 0;
-
-        static string input;
+        
 
         static void Main(string[] args)
         {
             WelcomeScreen();
         }
 
+        
         static void WelcomeScreen()
         {
-            score = 0;
-            Console.Clear();
+             /* Display a welcoming message
+              * Receive the user input and transfer it to InputReader
+              */
             Console.WriteLine("Type in the dices to roll");
-            AnalyzeInput();
-        }
-
-        static void AnalyzeInput()
-        {
-            string dices = "";
-            string faces = "";
-            bool isReadingFaces = false;
-
             input = Console.ReadLine();
-
-            foreach (char c in input)
-            {
-                if (char.Equals(c, 'd'))
-                {
-                    isReadingFaces = true;
-                }
-                else if (char.Equals(c, '+') || char.Equals(c, '-'))
-                {
-                    RollTheDice(dices, faces);
-                    dices = c.ToString();
-                    faces = "";
-                    isReadingFaces = false;
-                }
-                else if (char.IsDigit(c))
-                {
-                    if (isReadingFaces == false)
-                    {
-                        dices += c;
-                    }
-                    else
-                    {
-                        faces += c;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Input");
-                    Console.ReadLine();
-                    WelcomeScreen();
-                }
-            }
-
-            RollTheDice(dices, faces);
-            PrintResult();
+            InputReader.Read(input);
         }
+
+        
 
         static void RollTheDice(string dices, string faces)
         {
@@ -93,6 +55,15 @@ namespace DiceRolls
             Console.WriteLine("You scored: " + score);
             Console.ReadLine();
             WelcomeScreen();
+        }
+
+        static void Reset()
+        {
+            /* Reset the members and clear the console
+             */
+            score = 0;
+            input = "";
+            Console.Clear();
         }
     }
 }

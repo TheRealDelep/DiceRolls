@@ -6,13 +6,25 @@ using System.Threading.Tasks;
 
 namespace DiceRolls
 {
-    public static class Dice
+    public class Dice
     {
-        public static int Roll(int numberOfFaces)
+        int faces { get; set; }
+        int result { get; set; }
+
+        public Dice(int numberOfFaces)
         {
-            Random random = new Random();
-            int result = random.Next(numberOfFaces) + 1;
-            return result;
+            faces = numberOfFaces;
+            result = 0;
+        }
+
+        public void Roll ()
+        {
+             result = new Random().Next(faces) +1;
+        }
+
+        public void PrintResult()
+        {
+            Console.WriteLine("D" + faces + ": " + result);
         }
     }
 }

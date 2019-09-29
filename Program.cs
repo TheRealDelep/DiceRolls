@@ -21,33 +21,23 @@ namespace DiceRolls
         
         static void WelcomeScreen()
         {
-             /* Display a welcoming message
-              * Receive the user input and transfer it to InputReader
-              */
+            /* Display a welcoming message
+             * Receive the user input and transfer it to InputReader
+             */
+            Reset();
             Console.WriteLine("Type in the dices to roll");
             input = Console.ReadLine();
-            InputReader.Read(input);
+            RollTheDices();
         }
 
-        
-
-        static void RollTheDice(string dices, string faces)
+        static void RollTheDices()
         {
-            int numberOfDices = 0;
-            int numberOfFaces = 0;
-
-            int.TryParse(dices, out numberOfDices);
-            int.TryParse(faces, out numberOfFaces);
-
-            int result = 0;
-
-            for (int i = 0; i < Math.Abs(numberOfDices); i++)
+            foreach (Dice dice in InputReader.Read(input))
             {
-                result += Dice.Roll(numberOfFaces);
+                score += dice.Roll();
+                dice.PrintResult();
             }
-            result *= Math.Sign(numberOfDices);
-            score += result;
-
+            PrintResult();
         }
 
         static void PrintResult()

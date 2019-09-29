@@ -10,21 +10,48 @@ namespace DiceRolls
     {
         int faces { get; set; }
         int result { get; set; }
+        int bonus {  get; set; }
+        
 
-        public Dice(int numberOfFaces)
+        public bool isBonus { get; private set; }
+        string bonusMalus;
+
+        public Dice(int numberOfFaces, int bonusAmount)
         {
             faces = numberOfFaces;
+            bonus = bonusAmount;
+            if (faces == 0)
+            {
+                isBonus = true;
+                bonusMalus = bonus > 0 ? "Bonus: " : "Malus: ";
+            }
             result = 0;
         }
 
-        public void Roll ()
+        public int Roll ()
         {
-             result = new Random().Next(faces) +1;
+            if (isBonus)
+            {
+                result = bonus;
+            }
+            else
+            {
+                Random rnd = new Random();
+                result = (rnd.Next(Math.Abs(faces)) +1) * Math.Sign(faces);
+            }
+            return result;
         }
 
         public void PrintResult()
         {
-            Console.WriteLine("D" + faces + ": " + result);
+            if (isBonus)
+            {
+                Console.WriteLine(bonusMalus + bonus);
+            }
+            else
+            {
+                Console.WriteLine("D" + faces + ": " + result);
+            }
         }
     }
 }

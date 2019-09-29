@@ -1,2 +1,9 @@
 bin/
-obj/Debug/
+obj/
+Properties/
+App.config
+DiceRolls.csproj
+
+# vscode specific
+.history
+.vscode

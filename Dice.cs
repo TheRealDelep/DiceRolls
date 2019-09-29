@@ -12,7 +12,6 @@ namespace DiceRolls
         int result { get; set; }
         int bonus {  get; set; }
         
-
         public bool isBonus { get; private set; }
         string bonusMalus;
 
@@ -36,8 +35,7 @@ namespace DiceRolls
             }
             else
             {
-                Random rnd = new Random();
-                result = (rnd.Next(Math.Abs(faces)) +1) * Math.Sign(faces);
+                result = StrongRandom.GenerateNumber(faces);
             }
             return result;
         }

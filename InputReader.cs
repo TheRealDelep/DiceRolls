@@ -31,13 +31,11 @@ namespace DiceRolls
                 int sign = 1;
                 int.TryParse(match.Groups["face"].Value, out faces);
                 int.TryParse(match.Groups["sign"].Value + "1", out sign);
-                    
 
                 if (faces == 0)
                 {
                     dices.Add(new Dice(0, rolls * sign));
                 }
-
                 else
                 {
                     for (int i = 0; i < rolls; i++)

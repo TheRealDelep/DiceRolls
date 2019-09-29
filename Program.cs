@@ -12,13 +12,11 @@ namespace DiceRolls
         static int bonus = 0;
         static int score = 0;
         
-
         static void Main(string[] args)
         {
             WelcomeScreen();
         }
 
-        
         static void WelcomeScreen()
         {
             /* Display a welcoming message

@@ -9,7 +9,6 @@ namespace DiceRolls
 {
     public static class InputReader
     {
-
         public static List<Dice> Read(string input)
         {
             List<Dice> dices = new List<Dice>();
@@ -18,7 +17,7 @@ namespace DiceRolls
 
             if (Regex.IsMatch(input, @"^(((?<sign>(\+|-)?)(?<coef>\d+))(d(?<face>\d+))?)*$") == false)
             {
-                throw new Exception("invalid input");
+                throw new InvalidInputException("You tried to parse: " + input + " and it's not working");
             }
 
             Regex regex = new Regex(@"((?<sign>(\+|-)?)(?<coef>[0-9]+))(d(?<face>[0-9]+))?");

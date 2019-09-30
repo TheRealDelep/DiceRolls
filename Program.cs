@@ -8,44 +8,60 @@ namespace DiceRolls
 {
     class Program
     {
-        static string input = "";
-        static int bonus = 0;
-        static int score = 0;
-        
         static void Main(string[] args)
         {
-            WelcomeScreen();
+            string input = "";
+            List<Dice> dices = new List<Dice>();
+
+            while (input != "q")
+            {
+                WelcomeScreen(ref input);
+                RollTheDices(ref dices, input);
+            }
         }
 
-        static void WelcomeScreen()
+        static void WelcomeScreen(ref string input)
         {
             /* Display a welcoming message
              * Receive the user input and transfer it to InputReader
              */
-            Reset();
+            
             Console.WriteLine("Type in the dices to roll");
-            input = Console.ReadLine();
-            RollTheDices();
+            input = Console.ReadLine();  
         }
 
-        static void RollTheDices()
+        static void RollTheDices(ref List<Dice> dices, string input)
         {
-            foreach (Dice dice in InputReader.Read(input))
+            int score = 0;
+
+            try
+            {
+                dices = InputReader.Read(input);
+            }
+            catch (InvalidInputException exInput)
+            {
+                Console.WriteLine(exInput.Message);
+                Console.ReadLine();
+                return;
+            }
+
+            foreach (Dice dice in dices)
             {
                 score += dice.Roll();
                 dice.PrintResult();
             }
-            PrintResult();
+
+            PrintResult(score);
+            Reset(ref input, ref score);
         }
 
-        static void PrintResult()
+        static void PrintResult(int score)
         {
             Console.WriteLine("You scored: " + score);
             Console.ReadLine();
-            WelcomeScreen();
         }
 
-        static void Reset()
+        static void Reset(ref string input, ref int score)
         {
             /* Reset the members and clear the console
              */

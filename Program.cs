@@ -11,26 +11,22 @@ namespace DiceRolls
         static void Main(string[] args)
         {
             string input = "";
-            List<Dice> dices = new List<Dice>();
+            List<Calculable> dices = new List<Calculable>();
 
             while (input != "q")
             {
-                WelcomeScreen(ref input);
+                Console.Clear();
+                Console.WriteLine("Type in the dices to roll, enter q to exit");
+                Console.WriteLine();
+                input = Console.ReadLine();
+
                 RollTheDices(ref dices, input);
             }
+            Console.WriteLine("Thank you for using our program");
+            Console.ReadLine();
         }
 
-        static void WelcomeScreen(ref string input)
-        {
-            /* Display a welcoming message
-             * Receive the user input and transfer it to InputReader
-             */
-            
-            Console.WriteLine("Type in the dices to roll");
-            input = Console.ReadLine();  
-        }
-
-        static void RollTheDices(ref List<Dice> dices, string input)
+        static void RollTheDices(ref List<Calculable> dices, string input)
         {
             int score = 0;
 
@@ -40,34 +36,21 @@ namespace DiceRolls
             }
             catch (InvalidInputException exInput)
             {
-                Console.WriteLine(exInput.Message);
-                Console.ReadLine();
+                if (input != "q")
+                {
+                    Console.WriteLine(exInput.Message);
+                    Console.ReadLine();
+                }
                 return;
             }
 
-            foreach (Dice dice in dices)
+            foreach (Calculable dice in dices)
             {
-                score += dice.Roll();
+                score += dice.Calculate();
                 dice.PrintResult();
             }
-
-            PrintResult(score);
-            Reset(ref input, ref score);
-        }
-
-        static void PrintResult(int score)
-        {
             Console.WriteLine("You scored: " + score);
             Console.ReadLine();
-        }
-
-        static void Reset(ref string input, ref int score)
-        {
-            /* Reset the members and clear the console
-             */
-            score = 0;
-            input = "";
-            Console.Clear();
         }
     }
 }

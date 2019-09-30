@@ -6,50 +6,32 @@ using System.Threading.Tasks;
 
 namespace DiceRolls
 {
-    public class Dice
+    public class Dice : Calculable
     {
         int faces { get; set; }
         int result { get; set; }
-        int bonus {  get; set; }
-        
-        public bool isBonus { get; private set; }
-        string bonusMalus;
 
-        public Dice(int numberOfFaces, int bonusAmount)
+        public Dice(int numberOfFaces)
         {
             faces = numberOfFaces;
-            bonus = bonusAmount;
-            if (faces == 0)
-            {
-                isBonus = true;
-                bonusMalus = bonus > 0 ? "Bonus: " : "Malus: ";
-            }
             result = 0;
         }
 
         public int Roll ()
         {
-            if (isBonus)
-            {
-                result = bonus;
-            }
-            else
-            {
-                result = StrongRandom.GenerateNumber(faces);
-            }
+            result = StrongRandom.GenerateNumber(faces);
+            return result;
+        }
+
+        public int Calculate()
+        {
+            Roll();
             return result;
         }
 
         public void PrintResult()
         {
-            if (isBonus)
-            {
-                Console.WriteLine(bonusMalus + bonus);
-            }
-            else
-            {
-                Console.WriteLine("D" + faces + ": " + result);
-            }
+            Console.WriteLine("D" + faces + ": " + result);
         }
     }
 }

@@ -9,15 +9,15 @@ namespace DiceRolls
 {
     public static class InputReader
     {
-        public static List<Dice> Read(string input)
+        public static List<Calculable> Read(string input)
         {
-            List<Dice> dices = new List<Dice>();
+            List<Calculable> dices = new List<Calculable>();
 
             Regex.Replace(input, @"\s+", "");
 
             if (Regex.IsMatch(input, @"^(((?<sign>(\+|-)?)(?<coef>\d+))(d(?<face>\d+))?)*$") == false)
             {
-                throw new InvalidInputException("You tried to parse: " + input + " and it's not working");
+                throw new InvalidInputException("Invalid Input");
             }
 
             Regex regex = new Regex(@"((?<sign>(\+|-)?)(?<coef>[0-9]+))(d(?<face>[0-9]+))?");
@@ -33,13 +33,13 @@ namespace DiceRolls
 
                 if (faces == 0)
                 {
-                    dices.Add(new Dice(0, rolls * sign));
+                    dices.Add(new Bonus(rolls * sign));
                 }
                 else
                 {
                     for (int i = 0; i < rolls; i++)
                     {
-                        dices.Add(new Dice(faces * sign, 0));
+                        dices.Add(new Dice(faces * sign));
                     }
                 }
             }
